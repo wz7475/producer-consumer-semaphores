@@ -74,4 +74,5 @@ _PROTOTYPE( void panic, (char *format, int num)				);
 _PROTOTYPE( void tell_fs, (int what, int p1, int p2, int p3)		);
 
 /* main.c - new added by me*/
-_PROTOTYPE( int do_getprocnr, (void));
+_PROTOTYPE( int do_suspend, (void));
+_PROTOTYPE( int do_resume, (void));

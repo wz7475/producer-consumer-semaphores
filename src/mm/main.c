@@ -180,25 +180,24 @@ PRIVATE void mm_init()
 }
 
 
-PUBLIC int do_getprocnr(void)
-{
-	int index;
-	/*pid - param.h - mm_in.m1_i1*/
-  /*NR_PROC - minix/config.h - 32*/
-  /*mproc - mproc.h - global table with all processes*/
-  /*IN_USE, mp_flags - mproc.h */
-	for (index = 0; index < NR_PROCS; index++)
-  /* iterate through all user's processes */
-	{
-		/* check if pid is equal and if proccess is in use */
-		if (
-      (mproc[index].mp_pid == pid) 
-      && ((mproc[index].mp_flags & IN_USE) != 0)
-		)
-		{
-			return index;		
-		}	
-	}
-	/* raise error otherwise */ 
-	return ENOENT;
-}
+PUBLIC int do_suspend(void)  
+{  
+  return E_NO_MESSAGE;  
+}  
+
+
+PUBLIC int do_resume()  
+{  
+  message m;  
+  int i; 
+  int resumed_pid;  
+  m.m_type = OK;  
+  resumed_pid = mm_in.m1_i1;  
+  for(i = 0; i < NR_PROCS; i++)  
+  if(mproc[i].mp_flags & IN_USE && mproc[i].mp_pid == resumed_pid) {  
+    m.m_source = i;  
+    break;  
+  }  
+  send(m.m_source, &m);  
+  return OK;  
+}  

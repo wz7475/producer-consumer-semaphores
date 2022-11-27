@@ -1,4 +1,4 @@
-#define NCALLS		  79	/* number of system calls allowed */
+#define NCALLS		  80	/* number of system calls allowed */
 
 #define EXIT		   1 
 #define FORK		   2 
@@ -67,4 +67,5 @@
 #define SVRCTL		  77
 
 /* new - defined by me */
-#define GETPROCNR         78
+#define PROCSUSPEND         78
+#define PROCRESUME         79
