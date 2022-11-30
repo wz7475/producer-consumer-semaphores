@@ -69,7 +69,9 @@
 /* new - defined by me */
 #define PROCSUSPEND         78
 #define PROCRESUME         79
+
 #define SEMSTATUS         80
 #define SEMDOWN         81
+
 #define SEMUP         82
 #define SEMINIT         83
