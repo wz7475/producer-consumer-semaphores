@@ -18,6 +18,11 @@ int main(void){
     sem_down();
     status = sem_status();
     printf("%d\n", status);
-    
+
+    printf("call init with 1: ");
+    sem_init(1);
+    status = sem_status();
+    printf("%d\n", status);
+
     return 0;
 }

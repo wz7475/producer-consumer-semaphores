@@ -42,6 +42,9 @@ int sem_init(int value)
 {
     message msg;
     int result;
+    if (value != 0 && value != 1){
+        return -1;
+    }
     msg.m1_i1 = value;
     result = _syscall(MM, 83, &msg);
     return 0;
