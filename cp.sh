@@ -1,0 +1,1 @@
+sudo cp -vr ./* ../../minix_usr

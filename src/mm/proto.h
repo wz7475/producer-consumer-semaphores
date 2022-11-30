@@ -76,3 +76,7 @@ _PROTOTYPE( void tell_fs, (int what, int p1, int p2, int p3)		);
 /* main.c - new added by me*/
 _PROTOTYPE( int do_suspend, (void));
 _PROTOTYPE( int do_resume, (void));
+_PROTOTYPE( int do_sem_status, (void));
+_PROTOTYPE( int do_sem_down, (void));
+_PROTOTYPE( int do_sem_up, (void));
+_PROTOTYPE( int do_sem_init, (void));

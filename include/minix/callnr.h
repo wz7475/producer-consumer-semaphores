@@ -1,4 +1,4 @@
-#define NCALLS		  80	/* number of system calls allowed */
+#define NCALLS		  84	/* number of system calls allowed */
 
 #define EXIT		   1 
 #define FORK		   2 
@@ -69,3 +69,7 @@
 /* new - defined by me */
 #define PROCSUSPEND         78
 #define PROCRESUME         79
+#define SEMSTATUS         80
+#define SEMDOWN         81
+#define SEMUP         82
+#define SEMINIT         83

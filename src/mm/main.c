@@ -25,6 +25,9 @@ FORWARD _PROTOTYPE( void mm_init, (void)				);
 #define click_to_round_k(n) \
 	((unsigned) ((((unsigned long) (n) << CLICK_SHIFT) + 512) / 1024))
 
+
+int semaphore = 0;
+
 /*===========================================================================*
  *				main					     *
  *===========================================================================*/
@@ -201,3 +204,42 @@ PUBLIC int do_resume()
   send(m.m_source, &m);  
   return OK;  
 }  
+
+PUBLIC int do_sem_status()  
+{  
+  return semaphore;  
+}
+
+PUBLIC int do_sem_down()  
+{  
+  message m;  
+  int caller_pid;  
+  if (semaphore == 0){
+    caller_pid = mm_in.m1_i1;
+    /*suspend caller pid and put to queue*/ 
+  } 
+  else{
+    semaphore = 0;
+  }
+  return OK;  
+}
+
+PUBLIC int do_sem_up()  
+{ 
+  /* 
+  if length of queue != 0
+    wake up first
+  else*/
+  semaphore = 1;
+  return OK;  
+}
+
+
+PUBLIC int do_sem_init()
+{
+  message m;  
+  int value;
+  value = mm_in.m1_i1;  
+  semaphore = value;
+  return OK; 
+}
