@@ -34,7 +34,7 @@ int sem_up()
 {
     message msg;
     int result;
-    result = _syscall(MM, 81, &msg);
+    result = _syscall(MM, 82, &msg);
     return 0;
 }
 
@@ -43,6 +43,6 @@ int sem_init(int value)
     message msg;
     int result;
     msg.m1_i1 = value;
-    result = _syscall(MM, 81, &msg);
+    result = _syscall(MM, 83, &msg);
     return 0;
 }
