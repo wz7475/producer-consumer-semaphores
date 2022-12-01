@@ -39,7 +39,7 @@ int main(void)
 
     printf("%d %d", pids[0], pids[1]);
 
-    sleep(4);
+    sleep(5);
     for (i = 0; i < AMOUNT; i++)
     {
         kill(pids[i], 9);
