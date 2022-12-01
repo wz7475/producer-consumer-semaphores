@@ -1,86 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define SIZE 15
 
-struct QueueNode
-{
-    int key;
-    struct QueueNode *next;
-};
+int items[SIZE], front = -1, rear = -1;
 
-struct Queue
+int enqueue(int value)
 {
-    struct QueueNode *front, *rear;
-};
-
-/*create new node*/
-struct QueueNode *newNode(int value)
-{
-    struct QueueNode *temp = (struct QueueNode *)malloc(sizeof(struct QueueNode));
-    temp->key = value;
-    temp->next = NULL;
-    return temp;
+	if (rear == SIZE - 1)
+		return -1;
+	else
+	{
+		if (front == -1)
+			front = 0;
+		rear++;
+		items[rear] = value;
+		return 0;
+	}
 }
 
-/*init empty queue*/
-struct Queue *createQueue()
+int dequeue()
 {
-    struct Queue *queue = (struct Queue *)malloc(sizeof(struct Queue));
-    queue->front = queue->rear = NULL;
-    return queue;
+	if (front == -1)
+		return -1;
+	else
+	{
+		front++;
+		if (front > rear)
+			front = rear = -1;
+		return 0;
+	}
 }
 
-void dequeue(struct Queue *queue)
-{
-    struct QueueNode *temp;
-    /*empty queue*/
-    if (queue->front == NULL)
-        return;
-
-    /*move front one position*/
-    temp = queue->front;
-    queue->front = queue->front->next;
-
-    /*if queue becomes empty*/
-    if (queue->front == NULL)
-        queue->rear = NULL;
-
-    free(temp);
+int * getFrontPtr(){
+	return &items[front];
 }
 
-void enqueue(struct Queue *queue, int value)
+int main()
 {
-    struct QueueNode *temp = newNode(value);
+	int element;
+	int* front_ptr;
+	enqueue(1);
+	enqueue(2);
+	enqueue(3);
+	enqueue(4);
+	enqueue(5);
 
-    /*case with empty queue*/
-    if (queue->rear == NULL)
-    {
-        queue->front = queue->rear = temp;
-        return;
-    }
+	dequeue();
+	dequeue();
 
-    /*put at the end*/
-    queue->rear->next = temp;
-    queue->rear = temp;
-}
+	front_ptr = getFrontPtr();
+	element = *(front_ptr+1);
+	printf("%d\n", element);
 
-int getFirst(struct Queue *queue)
-{
-    return queue->front->key;
-}
-
- int main()
-{
-    struct Queue* queue = createQueue();
-    enqueue(queue, 10);
-    enqueue(queue, 20);
-    dequeue(queue);
-    dequeue(queue);
-    enqueue(queue, 30);
-    enqueue(queue, 40);
-    enqueue(queue, 50);
-    dequeue(queue);
-    int first = getFirst(queue);
-    printf("Queue Front : %d \n", first);
-    printf("Queue Rear : %d", queue->rear->key);
-    return 0;
+	return 0;
 }
