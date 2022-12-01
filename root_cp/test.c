@@ -11,6 +11,7 @@ int main(void) {
    printf("rozpoczecie procesu, PID=%d\n", pid);
    msg.m1_i1 = pid;
    _syscall(MM, PROCSUSPEND, &msg);
+   printf("zostaelem wznowiony raczej, PID=%d\n", pid);
    printf("zakonczenie procesu, PID=%d\n", pid);
    return 0;
 }

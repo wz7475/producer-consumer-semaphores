@@ -260,7 +260,8 @@ PUBLIC int do_sem_down()
   if (semaphore == 0){
     caller_pid = mm_in.m1_i1;
     enqueue(caller_pid);
-    /*suspend caller pid and put to queue*/ 
+    /*suspend caller pid and put to queue*/
+    return E_NO_MESSAGE;  
   } 
   else{
     semaphore = 0;
