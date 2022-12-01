@@ -35,6 +35,13 @@ int * getFrontPtr(){
 	return &items[front];
 }
 
+int isEmpty(){
+	if (front == -1 &&  rear == -1)
+		return 1;
+	else
+		return 0;
+}
+
 int main()
 {
 	int element;
@@ -51,6 +58,12 @@ int main()
 	front_ptr = getFrontPtr();
 	element = *(front_ptr+1);
 	printf("%d\n", element);
+
+	dequeue();		
+	dequeue();
+	printf("%d\n", isEmpty());		
+	dequeue();
+	printf("%d\n", isEmpty());		
 
 	return 0;
 }

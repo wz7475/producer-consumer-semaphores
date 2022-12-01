@@ -60,6 +60,17 @@ int * getFrontPtr(){
 	return &items[front];
 }
 
+int isEmpty(){
+	if (front == -1 &&  rear == -1)
+		return 1;
+	else
+		return 0;
+}
+
+int getFirst(){
+  return items[front];
+}
+
 /*===========================================================================*
  *				main					     *
  *===========================================================================*/
@@ -239,7 +250,7 @@ PUBLIC int do_resume()
 
 PUBLIC int do_sem_status()  
 {  
-  return items[front];  
+  return getFirst();  
 }
 
 PUBLIC int do_sem_down()  
@@ -259,11 +270,15 @@ PUBLIC int do_sem_down()
 
 PUBLIC int do_sem_up()  
 { 
-  /* 
-  if length of queue != 0
-    wake up first
-  else*/
-  semaphore = 1;
+  int pid_from_queue;
+  if (isEmpty()){
+    semaphore = 1;
+  }
+  else{
+    pid_from_queue = items[front];
+    dequeue();
+    /*wake up process with given pid*/
+  }
   return OK;  
 }
 

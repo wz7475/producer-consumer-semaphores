@@ -5,10 +5,8 @@
 #include <unistd.h>
 #include "semaphore.h"
 
+
 int main(void){
-    int ptr;
-    ptr = sem_status();
-    printf("first in q: %d ", ptr);
-    printf("\n");
+    sem_up();
     return 0;
 }
