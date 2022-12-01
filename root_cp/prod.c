@@ -4,12 +4,15 @@
 #include "config.h"
 #include "semaphore.h"
 
-int main()
+int main(int argc, char **argv[])
 {
     int mag_state;
     int prod_items;
     FILE *fptr;
+    char name[12];
 
+    sprintf(name, "prod%s.txt", argv[1]);
+    printf("%s", name);
     while (1)
     {
         /*prepare */

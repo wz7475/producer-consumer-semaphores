@@ -71,6 +71,12 @@ int getFirst(){
   return items[front];
 }
 
+int clearQueue(){
+  front = -1;
+  rear = -1;
+  return -1;
+}
+
 /*===========================================================================*
  *				main					     *
  *===========================================================================*/
@@ -307,5 +313,6 @@ PUBLIC int do_sem_init()
   int value;
   value = mm_in.m1_i1;  
   semaphore = value;
+  clearQueue();
   return OK; 
 }

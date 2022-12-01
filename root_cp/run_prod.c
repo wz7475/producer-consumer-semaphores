@@ -15,6 +15,8 @@ int main(void)
     pid_t child_pid;
     int pid;
     int pids[AMOUNT];
+    char str_i[2];
+    char* argument_list[] = {"./prod", "00", NULL};
     pid = (int)getpid();
     printf("%d\n", pid);
 
@@ -22,10 +24,12 @@ int main(void)
 
     for (i = 0; i < AMOUNT; i++)
     {
+        sprintf(str_i, "%d", i);
+        argument_list[1] = str_i;
         child_pid = fork();
         if (child_pid == 0)
         {
-            execvp("./prod", NULL);
+            execvp("./prod", argument_list);
         }
         else
         {

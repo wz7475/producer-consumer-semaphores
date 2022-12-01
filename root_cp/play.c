@@ -1,17 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int main(void){
-    // int tab[5] = {1,2,3,4,5};
-    int tab[5];
+int main(int argc, char **argv[])
+{
 
-    int *ptr = &t;
-    /*int *ptr = &tab; - throws warnings*/
+    char name[12];
 
-    printf("%d\n", *(ptr+22));
-    printf("%d\n", *(ptr+2));
-    printf("%d\n", *(ptr+1));
-    printf("%d\n", *(ptr));
-
+    sprintf(name, "prod%s.txt", argv[1]);
+    printf("%s", name);
     return 0;
 }
