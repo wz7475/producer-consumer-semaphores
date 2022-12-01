@@ -12,19 +12,21 @@ int main(int argc, char **argv[])
     FILE *fptr;
     char name[17];
 
-    
-
     sprintf(name, "files/prod%s.txt", argv[1]);
     printf("%s", name);
+    if ((fptr = fopen(name, "w")) == NULL)
+        exit(1);
+    fprintf(fptr, "");
+    fclose(fptr);
+
     while (1)
     {
         /*prepare */
-        prod_items = (rand() % (PROD_UP-PROD_LOW+1)) + PROD_LOW;
+        prod_items = (rand() % (PROD_UP - PROD_LOW + 1)) + PROD_LOW;
         if ((fptr = fopen(name, "a")) == NULL)
             exit(1);
-        fprintf(fptr, "wyprodukowano %d\n", prod_items);
+        fprintf(fptr, "produced %d\n", prod_items);
         fclose(fptr);
-            
 
         sleep(1);
         /*try to enter*/
@@ -48,9 +50,15 @@ int main(int argc, char **argv[])
             fclose(fptr);
             printf("wrote\n");
         }
-        else{
+        else
+        {
             succeeded_to_store = 0;
         }
+
+        if ((fptr = fopen(name, "a")) == NULL)
+            exit(1);
+        fprintf(fptr, "**after my try in magazine: %d**\n", mag_state);
+        fclose(fptr);
 
         /*quit and let in someone else*/
         sem_up();
@@ -58,13 +66,15 @@ int main(int argc, char **argv[])
         /*log what has been done*/
         if ((fptr = fopen(name, "a")) == NULL)
             exit(1);
-        if (succeeded_to_store){
-            fprintf(fptr, "odlozono do magazynu");
+        if (succeeded_to_store)
+        {
+            fprintf(fptr, "succeed\n\n");
         }
-        else{
-            fprintf(fptr, "za malo miejsca");
+        else
+        {
+            fprintf(fptr, "failed\n\n");
         }
-        
+        fclose(fptr);
     }
 
     return 0;
