@@ -248,6 +248,22 @@ PUBLIC int do_resume()
   return OK;  
 }  
 
+
+int help_resume(pid_to_resume)  
+int pid_to_resume;
+{  
+  message m;  
+  int i; 
+  m.m_type = OK;  
+  for(i = 0; i < NR_PROCS; i++)  
+  if(mproc[i].mp_flags & IN_USE && mproc[i].mp_pid == pid_to_resume) {  
+    m.m_source = i;  
+    break;  
+  }  
+  send(m.m_source, &m);  
+  return OK;  
+}  
+
 PUBLIC int do_sem_status()  
 {  
   return getFirst();  
@@ -279,6 +295,7 @@ PUBLIC int do_sem_up()
     pid_from_queue = items[front];
     dequeue();
     /*wake up process with given pid*/
+    help_resume(pid_from_queue);
   }
   return OK;  
 }
