@@ -25,8 +25,40 @@ FORWARD _PROTOTYPE( void mm_init, (void)				);
 #define click_to_round_k(n) \
 	((unsigned) ((((unsigned long) (n) << CLICK_SHIFT) + 512) / 1024))
 
-
+#define QUEUE_SIZE 20
 int semaphore = 0;
+int items[QUEUE_SIZE], front = -1, rear = -1;
+
+int enqueue(int value)
+{
+	if (rear == QUEUE_SIZE - 1)
+		return -1;
+	else
+	{
+		if (front == -1)
+			front = 0;
+		rear++;
+		items[rear] = value;
+		return 0;
+	}
+}
+
+int dequeue()
+{
+	if (front == -1)
+		return -1;
+	else
+	{
+		front++;
+		if (front > rear)
+			front = rear = -1;
+		return 0;
+	}
+}
+
+int * getFrontPtr(){
+	return &items[front];
+}
 
 /*===========================================================================*
  *				main					     *
@@ -207,7 +239,7 @@ PUBLIC int do_resume()
 
 PUBLIC int do_sem_status()  
 {  
-  return semaphore;  
+  return items[front];  
 }
 
 PUBLIC int do_sem_down()  
@@ -216,6 +248,7 @@ PUBLIC int do_sem_down()
   int caller_pid;  
   if (semaphore == 0){
     caller_pid = mm_in.m1_i1;
+    enqueue(caller_pid);
     /*suspend caller pid and put to queue*/ 
   } 
   else{
