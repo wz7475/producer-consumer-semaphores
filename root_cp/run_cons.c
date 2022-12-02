@@ -23,14 +23,13 @@ int main(int argc, char **argv[])
     int pid;
     int pids[AMOUNT];
     char str_i[2];
-    char* argument_list[] = {"./prod", "00", NULL};
+    char* argument_list[] = {"./cons", "00", NULL};
     pid = (int)getpid();
     /*printf("%d\n", pid);*/
 
     if (atoi(argv[2])){
         sem_init(1);
     }
-
 
     for (i = 0; i < atoi(argv[3]); i++)
     {
