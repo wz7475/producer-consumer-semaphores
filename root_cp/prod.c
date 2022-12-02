@@ -31,7 +31,6 @@ int main(int argc, char **argv[])
         sleep(1);
         /*try to enter*/
         sem_down();
-        printf("sem down\n");
 
         /*either succeeded or woken up by someone else -> go into CS*/
         /*check state*/
@@ -48,7 +47,6 @@ int main(int argc, char **argv[])
             mag_state += prod_items;
             fprintf(fptr, "%d", mag_state);
             fclose(fptr);
-            printf("wrote\n");
         }
         else
         {
@@ -62,7 +60,6 @@ int main(int argc, char **argv[])
 
         /*quit and let in someone else*/
         sem_up();
-        printf("sem up\n");
         /*log what has been done*/
         if ((fptr = fopen(name, "a")) == NULL)
             exit(1);
