@@ -272,7 +272,7 @@ int pid_to_resume;
 
 PUBLIC int do_sem_status()  
 {  
-  return getFirst();  
+  return semaphore;  
 }
 
 PUBLIC int do_sem_down()  
